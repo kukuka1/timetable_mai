@@ -1,32 +1,29 @@
-import os
 from bs4 import BeautifulSoup
 import datetime
 import requests
 import uuid
 
-group_name = '4О-605С-15'
+group_name = 'М1О-101С-20'
 year = str(datetime.datetime.now().year)
 with open(group_name + '.ics', 'w', encoding='utf8') as calendar:
-    calendar.write(
-'''BEGIN:VCALENDAR
-PRODID:-//Google Inc//Google Calendar 70.9054//EN
-VERSION:2.0
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-X-WR-CALNAME:МАИ
-X-WR-TIMEZONE:Europe/Moscow
-X-WR-CALDESC:{}
-BEGIN:VTIMEZONE
-TZID:Europe/Moscow
-X-LIC-LOCATION:Europe/Moscow
-BEGIN:STANDARD
-TZOFFSETFROM:+0300
-TZOFFSETTO:+0300
-TZNAME:MSK
-DTSTART:19700101T000000
-END:STANDARD
-END:VTIMEZONE
-'''.format(group_name))
+    calendar.write('BEGIN:VCALENDAR\n'
+                   'PRODID:-//Google Inc//Google Calendar 70.9054//EN\n'
+                   'VERSION:2.0\n'
+                   'CALSCALE:GREGORIAN\n'
+                   'METHOD:PUBLISH\n'
+                   'X-WR-CALNAME:МАИ\n'
+                   'X-WR-TIMEZONE:Europe/Moscow\n'
+                   'X-WR-CALDESC:{}\n'
+                   'BEGIN:VTIMEZONE\n'
+                   'TZID:Europe/Moscow\n'
+                   'X-LIC-LOCATION:Europe/Moscow\n'
+                   'BEGIN:STANDARD\n'
+                   'TZOFFSETFROM:+0300\n'
+                   'TZOFFSETTO:+0300\n'
+                   'TZNAME:MSK\n'
+                   'DTSTART:19700101T000000\n'
+                   'END:STANDARD\n'
+                   'END:VTIMEZONE\n'.format(group_name))
     days = []
     for i in range(18):
         data_group = requests.get('https://mai.ru/education/schedule/detail.php?group={}&week={}'.format(group_name, i))
